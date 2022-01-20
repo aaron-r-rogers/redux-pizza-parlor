@@ -17,7 +17,7 @@ function CustomerInfo () {
         // POST the new creature to our server
         axios({
         method: 'POST',
-        url: '/',
+        url: '/api/order',
         data: {
             customer_name,
             street_address,
