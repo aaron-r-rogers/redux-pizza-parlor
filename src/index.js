@@ -1,10 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App/App';
-import logger from 'redux-logger';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./components/App/App";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import logger from "redux-logger";
 import { Provider } from 'react-redux';
+
+const pizzaReducer = (state = [], action) => {
+  switch (action.type) {
+    case "SET_PIZZA_LIST":
+      return [...state, action.payload];
+  }
+
+  return state;
+};
+
 const orderReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_ORDER_LIST':
@@ -14,10 +24,17 @@ const orderReducer = (state = [], action) => {
 }
 
 const storeInstance = createStore(
-    combineReducers({
-        orderReducer: orderReducer
-    }),
-    applyMiddleware(logger),
+  combineReducers({
+    pizzaReducer,
+    orderReducer
+  }),
+  applyMiddleware(logger)
 );
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={storeInstance}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
+

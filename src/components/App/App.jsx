@@ -5,13 +5,29 @@ import './App.css';
 import { useDispatch } from 'react-redux'
 
 function App() {
-
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     console.log('in useEffect');
     getOrder();
+    getPizza();
   }, []);
+
+  const getPizza = () => {
+    console.log('In getPizza');
+    axios({
+      method: 'GET',
+      url: '/api/pizza'
+    }).then(response => {
+      console.log('GET pizza successful', response.data);
+      dispatch({
+        type: 'SET_PIZZA_LIST',
+        payload: response.data
+      })
+    }).catch(err => {
+      console.error('GET pizza failed', err);
+    });
+  }
 
   const getOrder = () => {
     axios({
