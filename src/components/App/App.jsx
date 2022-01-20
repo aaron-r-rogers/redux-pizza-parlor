@@ -4,6 +4,18 @@ import './App.css';
 
 function App() {
 
+  const getPizza = () => {
+    console.log('In getPizza');
+    axios({
+      method: 'GET',
+      url: '/api/pizza'
+    }).then(response => {
+      console.log('GET pizza successful', response.data);
+    }).catch(err => {
+      console.error('GET pizza failed', err);
+    });
+  }
+
   return (
     <div className='App'>
       <header className='App-header'>
