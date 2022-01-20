@@ -22,6 +22,13 @@ const orderReducer = (state = [], action) => {
         return action.payload
     }
 
+    switch (action.type) {
+         case 'REMOVE_PIZZA':
+             const matchPizza = order => order.id !== action.payload.id;
+             state.filter(matchPizza)
+             return state;
+    }
+
     return state;
 }
 
