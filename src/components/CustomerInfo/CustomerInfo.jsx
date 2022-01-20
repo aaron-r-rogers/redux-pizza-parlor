@@ -1,32 +1,34 @@
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import axios from 'axios';
 
 function CustomerInfo () {
 
-    const [customer_name, setNameInput] = useState('');
-    const [street_address, setAddressInput] = useState('');
-    const [city, setCityInput] = useState('');
-    const [zip, setZipInput] = useState('');
-    // useSelector to get total and pizzas
+    const [nameInput, setNameInput] = useState('');
+    const [addressInput, setAddressInput] = useState('');
+    const [cityInput, setCityInput] = useState('');
+    const [zipInput, setZipInput] = useState('');
+    const [orderType, setOrderType] = useState('');
     //const total = useSelector(store => store.total);
-    //const pizzas = useSelector(store => store.pizzas);
+    const pizzas = useSelector(store => store.orderReducer);
 
     function onClickNext (evt) {
-        
+        //const radioButtons = document.getElementsByName("orderType");
+    
         evt.preventDefault();
-        // POST the new creature to our server
+        // POST order to database
         axios({
         method: 'POST',
         url: '/api/order',
         data: {
-            customer_name,
-            street_address,
-            city,
-            zip,
-            type,
-            // get total and pizzas from store
-            total,
-            pizzas
+            customer_name: nameInput,
+            street_address: addressInput,
+            city: cityInput,
+            zip: zipInput,
+            type: orderType,
+            // TODO: get total from store
+            total: '20',
+            pizzas: pizzas
         }
     })
         .then((res) => {
@@ -42,6 +44,7 @@ function CustomerInfo () {
     <>
     {/* link to step 3 in onClickNext*/}
     {/* Header as component? */}
+    <h2>Step 2: Customer Information</h2>
     <form onSubmit={onClickNext}>
             <input
                 type="text"
@@ -67,7 +70,22 @@ function CustomerInfo () {
                 onChange={event => setZipInput(event.target.value)}
                 value={zipInput}
             />
-            {/* radial buttons set type */}
+            <br></br>
+            <input 
+                type="radio"
+                name="orderType"  
+                value="pickup"
+                onChange={event => setOrderType(event.target.value)}
+
+            />
+            <label htmlFor="pickup">Pickup</label><br></br>
+            <input 
+                type="radio"
+                name="orderType"  
+                value="delivery"
+                onChange={event => setOrderType(event.target.value)}
+            />
+            <label htmlFor="delivery">Delivery</label><br></br>
             <button>NEXT</button>
         </form>
     </>
