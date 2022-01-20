@@ -15,9 +15,18 @@ const pizzaReducer = (state = [], action) => {
   return state;
 };
 
+const orderReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_ORDER_LIST':
+        return action.payload
+    }
+    return state;
+}
+
 const storeInstance = createStore(
   combineReducers({
     pizzaReducer,
+    orderReducer
   }),
   applyMiddleware(logger)
 );
@@ -28,3 +37,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
+
