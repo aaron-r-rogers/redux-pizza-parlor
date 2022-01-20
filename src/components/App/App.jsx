@@ -6,6 +6,12 @@ import { useDispatch } from 'react-redux'
 
 function App() {
   const dispatch = useDispatch();
+  
+  useEffect(() => {
+    console.log('in useEffect');
+    getOrder();
+    getPizza();
+  }, []);
 
   const getPizza = () => {
     console.log('In getPizza');
@@ -22,13 +28,6 @@ function App() {
       console.error('GET pizza failed', err);
     });
   }
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    console.log('in useEffect');
-    getOrder();
-  }, []);
 
   const getOrder = () => {
     axios({
