@@ -1,8 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
+import { useDispatch } from 'react-redux'
 
 function App() {
+  const dispatch = useDispatch();
 
   const getPizza = () => {
     console.log('In getPizza');
@@ -11,6 +13,10 @@ function App() {
       url: '/api/pizza'
     }).then(response => {
       console.log('GET pizza successful', response.data);
+      dispatch({
+        type: 'SET_PIZZA_LIST',
+        payload: response.data
+      })
     }).catch(err => {
       console.error('GET pizza failed', err);
     });
