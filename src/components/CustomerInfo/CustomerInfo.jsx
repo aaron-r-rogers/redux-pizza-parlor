@@ -13,8 +13,7 @@ function CustomerInfo () {
     const pizzas = useSelector(store => store.orderReducer);
 
     function onClickNext (evt) {
-        //const radioButtons = document.getElementsByName("orderType");
-    
+
         evt.preventDefault();
         // POST order to database
         axios({
@@ -26,7 +25,7 @@ function CustomerInfo () {
             city: cityInput,
             zip: zipInput,
             type: orderType,
-            // TODO: get total from store
+            // TODO: get total from store '20' is for testing
             total: '20',
             pizzas: pizzas
         }
