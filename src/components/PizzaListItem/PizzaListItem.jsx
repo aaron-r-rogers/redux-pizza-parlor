@@ -1,18 +1,20 @@
+import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
-function PizzaListItem(){
+function PizzaListItem({pizza}){
     const [added, setAdded] = useState(false);
-
+    console.log(pizza);
     const dispatch = useDispatch();
 
     const addItem = (pizza) => {
         dispatch({
-            type: 'ADD_PIZZA',
+            type: 'SET_ORDER_LIST',
             payload: {
-                name: foodItem.name,
-                price: foodItem.id,
-                id: foodItem.id,
+                name: pizza.name,
+                description: pizza.description,
+                price: pizza.price,
+                id: pizza.id,
                 quantity: 1
             }
         })
@@ -31,6 +33,7 @@ function PizzaListItem(){
 
         <div>
             
+            <img src={pizza.image_path}/>
 
             <section>
                 <h3>{pizza.name}</h3>
@@ -43,7 +46,7 @@ function PizzaListItem(){
                 ) : (
                     <button onClick={() => removeItem(pizza)}>Remove Pizza</button>
                 )}
-                <h2>${pizza.price}</h2>
+                <h3>${pizza.price}</h3>
             </section>
         </div>
     )
