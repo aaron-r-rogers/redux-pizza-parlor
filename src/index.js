@@ -6,13 +6,6 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import { Provider } from 'react-redux';
 
-/* const pizzas = (state=[], action) => {
-    switch(action.type){
-        case 'SHOW_PIZZAS':
-            return action.payload;
-    }
-    return state;
-} */
 
 const pizzaReducer = (state = [], action) => {
   switch (action.type) {
