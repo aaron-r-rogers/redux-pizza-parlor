@@ -3,6 +3,8 @@ import axios from 'axios';
 import {useState, useEffect} from 'react'
 import './App.css';
 import { useDispatch } from 'react-redux'
+import CustomerInfo from '../CustomerInfo/CustomerInfo.jsx';
+import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 
 import PizzaList from '../PizzaList/PizzaList';
 
@@ -46,7 +48,9 @@ function App() {
       console.log('GET error', error);
     })
   }
+  
   return (
+    <Router>
     <div className='App'>
       <header className='App-header'>
         <h1 className='App-title'>Prime Pizza</h1>
@@ -54,8 +58,11 @@ function App() {
   
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
-      <PizzaList />
+      <Route path="/step2" exact>
+        <CustomerInfo />
+      </Route>
     </div>
+    </Router>
   );
 }
 
