@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux'
 import CustomerInfo from '../CustomerInfo/CustomerInfo.jsx';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
 
+import PizzaList from '../PizzaList/PizzaList';
+
+
 function App() {
   const dispatch = useDispatch();
   
