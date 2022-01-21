@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 import { Link } from 'react-router-dom';
-function Checkout({getOrder}) {
+function Checkout() {
 
     const order = useSelector(store => store.orderReducer)
     const info = useSelector(store => store.customerReducer)
