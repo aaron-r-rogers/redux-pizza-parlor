@@ -29,7 +29,7 @@ const orderReducer = (state = [], action) => {
       return [];
     }
 
-    }
+    
     return state;
 }
 
