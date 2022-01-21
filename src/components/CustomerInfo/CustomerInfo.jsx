@@ -1,9 +1,11 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function CustomerInfo () {
+
+    const dispatch = useDispatch()
 
     const [nameInput, setNameInput] = useState('');
     const [addressInput, setAddressInput] = useState('');
@@ -11,33 +13,48 @@ function CustomerInfo () {
     const [zipInput, setZipInput] = useState('');
     const [orderType, setOrderType] = useState('');
     //const total = useSelector(store => store.total);
-    const pizzas = useSelector(store => store.orderReducer);
+    //const pizzas = useSelector(store => store.orderReducer);
 
     function onClickNext (evt) {
 
         evt.preventDefault();
-        // POST order to database
-        axios({
-        method: 'POST',
-        url: '/api/order',
-        data: {
-            customer_name: nameInput,
-            street_address: addressInput,
-            city: cityInput,
-            zip: zipInput,
-            type: orderType,
-            // TODO: get total from store '20' is for testing
-            total: '20',
-            pizzas: pizzas
-        }
-    })
-        .then((res) => {
-            console.log('POST success! 🍕');
+        // dispatch order to reducer/store
+
+        dispatch({
+            type: 'SET_CUSTOMER',
+            data: {
+                customer_name: nameInput,
+                street_address: addressInput,
+                city: cityInput,
+                zip: zipInput,
+                type: orderType,
+                // TODO: get total from store '20' is for testing
+                total: '20',
+            }
         })
-        .catch(err => {
-            console.log('POST failed 😢', err);
-        });
-    };
+    }
+
+    //     axios({
+    //     method: 'POST',
+    //     url: '/api/order',
+    //     data: {
+    //         customer_name: nameInput,
+    //         street_address: addressInput,
+    //         city: cityInput,
+    //         zip: zipInput,
+    //         type: orderType,
+    //         // TODO: get total from store '20' is for testing
+    //         total: '20',
+    //         pizzas: pizzas
+    //     }
+    // })
+    //     .then((res) => {
+    //         console.log('POST success! 🍕');
+    //     })
+    //     .catch(err => {
+    //         console.log('POST failed 😢', err);
+    //     });
+    // };
 
 
     return (

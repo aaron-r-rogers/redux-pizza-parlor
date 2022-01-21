@@ -12,15 +12,32 @@ import Home from '../Home/Home';
 import PizzaList from '../PizzaList/PizzaList';
 
 function App() {
-	const dispatch = useDispatch();
 
-	useEffect(() => {
-		console.log('in useEffect');
-		getOrder();
-		getPizza();
-	}, []);
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    console.log('in useEffect');
+    //getOrder();
+    getPizza();
+  }, []);
 
-	const getPizza = () => {
+
+
+  // const getOrder = () => {
+  //   axios({
+  //     method: 'GET',
+  //     url: '/api/order'
+  //   }).then(response => {
+  //     console.log('response is', response.data);
+  //     dispatch({
+  //       type: 'SET_ORDER_LIST',
+  //       payload: response.data
+  //     })
+  //   }).catch(error => {
+  //     console.log('GET error', error);
+  //   })
+  // }
+  const getPizza = () => {
 		console.log('In getPizza');
 		axios({
 			method: 'GET',
@@ -37,26 +54,7 @@ function App() {
 				console.error('GET pizza failed', err);
 			});
 	};
-
-	const getOrder = () => {
-		axios({
-			method: 'GET',
-			url: '/api/order'
-		})
-			.then((response) => {
-				console.log('response is', response.data);
-				dispatch({
-					type: 'SET_ORDER_LIST',
-					payload: response.data
-				});
-			})
-			.catch((error) => {
-				console.log('GET error', error);
-			});
-	};
-
-
-return (
+  return (
     <Router>
     <div className='App'>
       <Route path="/" exact>
@@ -71,6 +69,8 @@ return (
       <Route path="/checkout">
 				<Checkout getOrder={getOrder} />
 			</Route>
+
+
     </div>
     </Router>
   );
