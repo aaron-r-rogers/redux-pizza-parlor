@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function CustomerInfo () {
 
@@ -85,7 +86,8 @@ function CustomerInfo () {
                 onChange={event => setOrderType(event.target.value)}
             />
             <label htmlFor="delivery">Delivery</label><br></br>
-            <button>NEXT</button>
+            <Link to='/checkout'><button>NEXT</button></Link>
+            <Link to='/'><button>PREVIOUS</button></Link>
         </form>
     </>
     )
