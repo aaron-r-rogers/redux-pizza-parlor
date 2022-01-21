@@ -3,11 +3,10 @@ import axios from 'axios';
 import {useState, useEffect} from 'react'
 import './App.css';
 import { useDispatch } from 'react-redux'
+import Checkout from '../Checkout/Checkout'
 import CustomerInfo from '../CustomerInfo/CustomerInfo.jsx';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
-
 import PizzaList from '../PizzaList/PizzaList';
-
 
 function App() {
   const dispatch = useDispatch();
@@ -58,9 +57,12 @@ function App() {
   
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
+
+      <Checkout getOrder={getOrder}/>
       <Route path="/step2" exact>
         <CustomerInfo />
       </Route>
+    <PizzaList />
     </div>
     </Router>
   );
