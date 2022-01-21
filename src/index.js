@@ -17,11 +17,19 @@ const pizzaReducer = (state = [], action) => {
 };
 
 const orderReducer = (state = [], action) => {
-    switch (action.type) {
-        case 'SET_ORDER_LIST':
-        return action.payload
+
+    if(action.type === 'SET_ORDER_LIST'){
+        return [... state, action.payload]
+    }
+    if(action.type === 'REMOVE_PIZZA'){
+        const matchPizza = order => order.id !== action.payload.id;
+        return state.filter(matchPizza);
+    }
+    if(action.type === 'CLEAR_ORDER_LIST'){
+      return [];
     }
 
+    
     return state;
 }
 
