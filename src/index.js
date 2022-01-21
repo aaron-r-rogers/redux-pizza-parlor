@@ -12,25 +12,33 @@ const pizzaReducer = (state = [], action) => {
     case "SET_PIZZA_LIST":
       return action.payload;
   }
-
   return state;
 };
 
 const orderReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_ORDER_LIST':
-        return action.payload
+          return action.payload
         case 'CLEAR_ORDER_LIST':
-        return []
+          return []
     }
-
     return state;
+}
+
+const customerReducer = (state = [], action) => {
+  switch (action.type) {
+      case 'SET_CUSTOMER':
+        console.log('action.payload is:', action.data)
+        return action.data
+  }
+  return state;
 }
 
 const storeInstance = createStore(
   combineReducers({
     pizzaReducer,
     orderReducer,
+    customerReducer
     //pizzas
   }),
   applyMiddleware(logger)

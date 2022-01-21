@@ -13,7 +13,7 @@ function App() {
   
   useEffect(() => {
     console.log('in useEffect');
-    getOrder();
+    //getOrder();
     getPizza();
   }, []);
 
@@ -33,20 +33,20 @@ function App() {
     });
   }
 
-  const getOrder = () => {
-    axios({
-      method: 'GET',
-      url: '/api/order'
-    }).then(response => {
-      console.log('response is', response.data);
-      dispatch({
-        type: 'SET_ORDER_LIST',
-        payload: response.data
-      })
-    }).catch(error => {
-      console.log('GET error', error);
-    })
-  }
+  // const getOrder = () => {
+  //   axios({
+  //     method: 'GET',
+  //     url: '/api/order'
+  //   }).then(response => {
+  //     console.log('response is', response.data);
+  //     dispatch({
+  //       type: 'SET_ORDER_LIST',
+  //       payload: response.data
+  //     })
+  //   }).catch(error => {
+  //     console.log('GET error', error);
+  //   })
+  // }
   
   return (
     <Router>
@@ -58,11 +58,18 @@ function App() {
       <img src='images/pizza_photo.png' />
       <p>Pizza is great.</p>
 
-      <Checkout getOrder={getOrder}/>
+      <Route path="/" exact>
+        <PizzaList />
+      </Route>
+
       <Route path="/step2" exact>
         <CustomerInfo />
       </Route>
-    <PizzaList />
+
+      <Route path="/step3" exact>
+        <Checkout />
+      </Route>
+
     </div>
     </Router>
   );
