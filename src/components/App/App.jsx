@@ -61,6 +61,7 @@ function App() {
       <Route path="/step2" exact>
         <CustomerInfo />
       </Route>
+      <PizzaList />
     </div>
     </Router>
   );

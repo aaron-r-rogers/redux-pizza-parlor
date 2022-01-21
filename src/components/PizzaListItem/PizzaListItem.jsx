@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 function PizzaListItem({pizza}){
     const [added, setAdded] = useState(false);
-    console.log(pizza);
+    //console.log(pizza);
     const dispatch = useDispatch();
 
     const addItem = (pizza) => {
