@@ -4,9 +4,8 @@ import "./Admin.css";
 import AdminListItem from "./AdminListItem";
 import { useEffect } from "react";
 
-function Admin({ getOrder }) {
+function Admin() {
   const orders = useSelector((store) => store.orderReducer);
-  getOrder();
   return (
     <div>
       <header className="adminHeader">
