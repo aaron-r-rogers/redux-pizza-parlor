@@ -5,6 +5,9 @@ import './App.css';
 import { useDispatch } from 'react-redux'
 import CustomerInfo from '../CustomerInfo/CustomerInfo.jsx';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
+import Admin from '../Admin/Admin';
+import Header from '../Header/Header';
+import Home from '../Home/Home';
 
 import PizzaList from '../PizzaList/PizzaList';
 
@@ -52,12 +55,12 @@ function App() {
   return (
     <Router>
     <div className='App'>
-      <header className='App-header'>
-        <h1 className='App-title'>Prime Pizza</h1>
-      </header>
-  
-      <img src='images/pizza_photo.png' />
-      <p>Pizza is great.</p>
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      <Route path="/admin" exact>
+        <Admin getOrder={getOrder}/>
+      </Route>
       <Route path="/step2" exact>
         <CustomerInfo />
       </Route>
