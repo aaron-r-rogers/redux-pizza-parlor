@@ -1,14 +1,18 @@
 import React from 'react';
 import axios from 'axios';
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react';
 import './App.css';
-import { useDispatch } from 'react-redux'
-import Checkout from '../Checkout/Checkout'
+import { useDispatch } from 'react-redux';
+import Checkout from '../Checkout/Checkout';
 import CustomerInfo from '../CustomerInfo/CustomerInfo.jsx';
 import { HashRouter as Router, Route, Link, useHistory } from 'react-router-dom';
+import Admin from '../Admin/Admin';
+import Header from '../Header/Header';
+import Home from '../Home/Home';
 import PizzaList from '../PizzaList/PizzaList';
 
 function App() {
+
   const dispatch = useDispatch();
   
   useEffect(() => {
@@ -17,21 +21,7 @@ function App() {
     getPizza();
   }, []);
 
-  const getPizza = () => {
-    console.log('In getPizza');
-    axios({
-      method: 'GET',
-      url: '/api/pizza'
-    }).then(response => {
-      console.log('GET pizza successful', response.data);
-      dispatch({
-        type: 'SET_PIZZA_LIST',
-        payload: response.data
-      })
-    }).catch(err => {
-      console.error('GET pizza failed', err);
-    });
-  }
+
 
   // const getOrder = () => {
   //   axios({
@@ -47,28 +37,39 @@ function App() {
   //     console.log('GET error', error);
   //   })
   // }
-  
+  const getPizza = () => {
+		console.log('In getPizza');
+		axios({
+			method: 'GET',
+			url: '/api/pizza'
+		})
+			.then((response) => {
+				console.log('GET pizza successful', response.data);
+				dispatch({
+					type: 'SET_PIZZA_LIST',
+					payload: response.data
+				});
+			})
+			.catch((err) => {
+				console.error('GET pizza failed', err);
+			});
+	};
   return (
     <Router>
     <div className='App'>
-      <header className='App-header'>
-        <h1 className='App-title'>Prime Pizza</h1>
-      </header>
-  
-      <img src='images/pizza_photo.png' />
-      <p>Pizza is great.</p>
-
       <Route path="/" exact>
-        <PizzaList />
+        <Home />
       </Route>
-
+      <Route path="/admin" exact>
+        <Admin getOrder={getOrder}/>
+      </Route>
       <Route path="/step2" exact>
         <CustomerInfo />
       </Route>
+      <Route path="/checkout">
+				<Checkout getOrder={getOrder} />
+			</Route>
 
-      <Route path="/step3" exact>
-        <Checkout />
-      </Route>
 
     </div>
     </Router>

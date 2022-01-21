@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 function Checkout({getOrder}) {
 
     const order = useSelector(store => store.orderReducer)
@@ -64,7 +65,7 @@ function Checkout({getOrder}) {
         </table>
         <h3>total: </h3>
         <button onClick={handleCheckout}>Checkout</button>
-
+        <Link to='/step2'><button>PREVIOUS</button></Link>
         </>
 
     )

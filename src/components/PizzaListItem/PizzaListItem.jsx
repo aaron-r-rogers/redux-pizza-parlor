@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function PizzaListItem({pizza}){
     const [added, setAdded] = useState(false);
-    console.log(pizza);
+    //console.log(pizza);
     const dispatch = useDispatch();
 
     const addItem = (pizza) => {
@@ -30,7 +31,7 @@ function PizzaListItem({pizza}){
     }
 
     return (
-
+        <>
         <div>
             
             <img src={pizza.image_path}/>
@@ -49,6 +50,8 @@ function PizzaListItem({pizza}){
                 <h3>${pizza.price}</h3>
             </section>
         </div>
+
+        </>
     )
 }
 
